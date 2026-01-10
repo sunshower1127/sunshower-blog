@@ -22,3 +22,5 @@ pnpm-debug.log*
 .DS_Store
 
 node_modules
+# Local Netlify folder
+.netlify

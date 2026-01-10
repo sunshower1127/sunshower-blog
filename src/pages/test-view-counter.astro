@@ -1,0 +1,36 @@
+---
+import { ViewCounter } from '@/features/view-count'
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+
+<BaseLayout title='View Counter Test'>
+	<div class='p-8 space-y-4'>
+		<h1 class='text-3xl font-bold'>View Counter Test (Solid.js)</h1>
+
+		<div class='space-y-2'>
+			<h2 class='text-xl font-semibold'>증가 모드 (increment=true)</h2>
+			<ViewCounter client:load slug='test-post-1' increment={true} />
+		</div>
+
+		<div class='space-y-2'>
+			<h2 class='text-xl font-semibold'>조회 모드 (increment=false)</h2>
+			<ViewCounter client:load slug='test-post-1' increment={false} />
+		</div>
+
+		<div class='bg-gray-800 p-4 rounded space-y-2'>
+			<h2 class='text-white text-xl font-semibold'>흰색 텍스트</h2>
+			<ViewCounter client:load slug='test-post-2' increment={false} class='text-white' />
+		</div>
+
+		<div class='mt-8 p-4 bg-blue-50 dark:bg-blue-900 rounded'>
+			<h3 class='font-semibold mb-2'>💡 확인사항 (방법 2: client:load + onMount):</h3>
+			<ul class='list-disc list-inside space-y-1 text-sm'>
+				<li>client:load 사용 (SSR + Hydration)</li>
+				<li>createResource 대신 createSignal 사용</li>
+				<li>onMount에서만 fetch (SSR 시 안 실행)</li>
+				<li>Suspense/Show 대신 일반 조건부 렌더링</li>
+				<li>개발자 도구 → Console에서 에러 확인 (에러 없어야 함!)</li>
+			</ul>
+		</div>
+	</div>
+</BaseLayout>

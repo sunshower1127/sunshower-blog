@@ -4,13 +4,16 @@
 		"strictNullChecks": true,
 		"baseUrl": ".",
 		"verbatimModuleSyntax": true,
+		"jsx": "preserve",
+		"jsxImportSource": "solid-js",
 		"paths": {
 			"@/components/*": ["src/components/*.astro"],
 			"@/layouts/*": ["src/layouts/*.astro"],
 			"@/utils": ["src/utils/index.ts"],
 			"@/data/*": ["src/data/*"],
 			"@/site-config": ["src/data/site.config.ts"],
-			"@/styles": ["src/styles/"]
+			"@/styles": ["src/styles/"],
+			"@/features/*": ["src/features/*"]
 		}
 	},
 	"exclude": ["node_modules", "**/node_modules/*", ".vscode", "dist"]
