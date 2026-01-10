@@ -8,11 +8,14 @@ interface ViewCounterProps {
 }
 
 export const ViewCounter: Component<ViewCounterProps> = (props) => {
-	const [count] = createResource(async () => {
-		return props.increment
-			? await viewCounterClient.incrementViewCount(props.slug)
-			: await viewCounterClient.getViewCount(props.slug)
-	})
+	const [count] = createResource(
+		() => props.slug,
+		async (slug) => {
+			return props.increment
+				? await viewCounterClient.incrementViewCount(slug)
+				: await viewCounterClient.getViewCount(slug)
+		}
+	)
 
 	return (
 		<span
