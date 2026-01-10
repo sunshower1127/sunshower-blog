@@ -10,7 +10,8 @@ module.exports = {
 				white: '#f8f9fa'
 			},
 			fontFamily: {
-				body: ['Manrope', ...defaultTheme.fontFamily.sans]
+				sans: ['Pretendard', 'Manrope', ...defaultTheme.fontFamily.sans],
+				body: ['Pretendard', 'Manrope', ...defaultTheme.fontFamily.sans]
 			},
 			gridTemplateColumns: {
 				list: 'repeat(auto-fill, minmax(400px, max-content))'
