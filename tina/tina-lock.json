@@ -25,7 +25,13 @@
 						"name": "category",
 						"label": "Category",
 						"description": "Select an category for this post",
-						"options": ["Category 1", "Category 2", "Category 3", "Category 4", "Category 5"],
+						"options": [
+							"General",
+							"Frontend",
+							"Backend",
+							"Code Architecture",
+							"Dev with AI Assistant"
+						],
 						"namespace": ["post", "category"],
 						"searchable": true,
 						"uid": false
