@@ -17,6 +17,8 @@ export const ViewCounter: Component<ViewCounterProps> = (props) => {
 		}
 	)
 
+	// ISSUE: solid-js의 createResource가 Client Side에서 자동으로 트리거 되지 않음.
+	// 따라서 onMount에서 refetch를 호출하여 초기화를 수동으로 트리거해야 함. (공식 권장 패턴)
 	onMount(() => {
 		refetch()
 	})

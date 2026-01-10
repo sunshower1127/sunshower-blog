@@ -32,7 +32,7 @@ const viewCountSlug = id.replace('.mdx', '').replace('.md', '')
 					<FormattedDate date={pubDate} />
 					<span class='text-sm'
 						>{readTime}
-						<ViewCounter client:only='solid-js' slug={viewCountSlug} increment={false} /></span
+						<ViewCounter client:load slug={viewCountSlug} increment={false} /></span
 					>
 				</div>
 
