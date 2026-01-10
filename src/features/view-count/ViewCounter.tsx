@@ -1,4 +1,4 @@
-import { createResource, type Component } from 'solid-js'
+import { createResource, onMount, type Component } from 'solid-js'
 import { viewCounterClient } from './ViewCounterClient'
 
 interface ViewCounterProps {
@@ -8,7 +8,7 @@ interface ViewCounterProps {
 }
 
 export const ViewCounter: Component<ViewCounterProps> = (props) => {
-	const [count] = createResource(
+	const [count, { refetch }] = createResource(
 		() => props.slug,
 		async (slug) => {
 			return props.increment
@@ -16,6 +16,10 @@ export const ViewCounter: Component<ViewCounterProps> = (props) => {
 				: await viewCounterClient.getViewCount(slug)
 		}
 	)
+
+	onMount(() => {
+		refetch()
+	})
 
 	return (
 		<span
