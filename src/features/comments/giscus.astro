@@ -1,0 +1,37 @@
+<div class='mx-auto px-6 sm:px-6 max-w-3xl pt-8 md:pt-4 pb-12 md:pb-20'>
+	<div class='giscus scale-110'></div>
+</div>
+
+<script>
+	// giscus 스크립트 동적 로드
+	const script = document.createElement('script')
+	script.src = 'https://giscus.app/client.js'
+	script.setAttribute('data-repo', 'sunshower1127/sunshower-blog')
+	script.setAttribute('data-repo-id', 'R_kgDOQw9Y2Q')
+	script.setAttribute('data-category', 'General')
+	script.setAttribute('data-category-id', 'DIC_kwDOQw9Y2c4C0ylV')
+	script.setAttribute('data-mapping', 'pathname')
+	script.setAttribute('data-strict', '0')
+	script.setAttribute('data-reactions-enabled', '1')
+	script.setAttribute('data-emit-metadata', '0')
+	script.setAttribute('data-input-position', 'bottom')
+	script.setAttribute('data-theme', localStorage.getItem('theme') ?? 'light')
+	script.setAttribute('data-lang', 'en')
+	script.setAttribute('data-loading', 'lazy')
+	script.crossOrigin = 'anonymous'
+	script.async = true
+
+	const container = document.querySelector('.giscus')
+	if (container) {
+		container.appendChild(script)
+	}
+
+	// 테마 변경 시 giscus 테마도 업데이트
+	document.addEventListener('theme-change', () => {
+		const iframe = document.querySelector('iframe.giscus-frame') as HTMLIFrameElement | null
+		if (iframe?.contentWindow) {
+			const theme = localStorage.getItem('theme') ?? 'light'
+			iframe.contentWindow.postMessage({ giscus: { setConfig: { theme } } }, 'https://giscus.app')
+		}
+	})
+</script>
