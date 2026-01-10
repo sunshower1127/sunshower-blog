@@ -13,6 +13,11 @@ export class ViewCounterClient {
 	 * @returns 현재 조회수
 	 */
 	public async getViewCount(slug: string): Promise<number> {
+		// 서버 환경(빌드 타임)에서는 0 반환
+		if (typeof window === 'undefined') {
+			return 0
+		}
+
 		try {
 			const url = this.getAbsoluteUrl(`${this.API_ENDPOINT}?slug=${encodeURIComponent(slug)}`)
 			const response = await fetch(url, {
@@ -37,6 +42,11 @@ export class ViewCounterClient {
 	 * @returns 증가된 조회수
 	 */
 	public async incrementViewCount(slug: string): Promise<number> {
+		// 서버 환경(빌드 타임)에서는 0 반환
+		if (typeof window === 'undefined') {
+			return 0
+		}
+
 		// 이미 조회한 경우 증가하지 않고 현재 값만 반환
 		if (this.hasViewedInSession(slug)) {
 			return this.getViewCount(slug)
