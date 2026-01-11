@@ -1,4 +1,4 @@
-import { createResource, onMount, type Component } from 'solid-js'
+import { createSignal, onMount, type Component } from 'solid-js'
 import { viewCounterClient } from './ViewCounterClient'
 
 interface ViewCounterProps {
@@ -8,19 +8,13 @@ interface ViewCounterProps {
 }
 
 export const ViewCounter: Component<ViewCounterProps> = (props) => {
-	const [count, { refetch }] = createResource(
-		() => props.slug,
-		async (slug) => {
-			return props.increment
-				? await viewCounterClient.incrementViewCount(slug)
-				: await viewCounterClient.getViewCount(slug)
-		}
-	)
+	const [count, setCount] = createSignal<number>(0)
 
-	// ISSUE: solid-js의 createResource가 Client Side에서 자동으로 트리거 되지 않음.
-	// 따라서 onMount에서 refetch를 호출하여 초기화를 수동으로 트리거해야 함. (공식 권장 패턴)
-	onMount(() => {
-		refetch()
+	onMount(async () => {
+		const result = props.increment
+			? await viewCounterClient.incrementViewCount(props.slug)
+			: await viewCounterClient.getViewCount(props.slug)
+		setCount(result)
 	})
 
 	return (
@@ -29,7 +23,7 @@ export const ViewCounter: Component<ViewCounterProps> = (props) => {
 		>
 			<ViewCounterIcon />
 			<span class='min-w-8' aria-label='View count'>
-				<span>{count()?.toLocaleString() ?? '0'}</span>
+				<span>{count().toLocaleString()}</span>
 			</span>
 			<span class='sr-only'>views</span>
 		</span>
