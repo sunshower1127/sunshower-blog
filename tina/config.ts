@@ -26,6 +26,21 @@ export default defineConfig({
 				label: 'Blog Post',
 				path: 'src/content/blog',
 				format: 'mdx',
+				ui: {
+					filename: {
+						readonly: false,
+						slugify: (values) => {
+							return (
+								values?.title
+									?.toLowerCase()
+									.replace(/[^a-z0-9가-힣\s-]/g, '')
+									.replace(/\s+/g, '-')
+									.replace(/-+/g, '-')
+									.trim() || 'untitled'
+							)
+						}
+					}
+				},
 				fields: [
 					{
 						type: 'image',

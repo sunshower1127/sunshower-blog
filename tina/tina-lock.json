@@ -8,6 +8,7 @@
 				"label": "Blog Post",
 				"path": "src/content/blog",
 				"format": "mdx",
+				"ui": { "filename": { "readonly": false } },
 				"fields": [
 					{
 						"type": "image",
